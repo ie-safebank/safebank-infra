@@ -73,7 +73,7 @@ jobs:
         template: ./main.bicep
         parameters: >
           ./parameters/dev.bicepparam 
-          slackWebHookUrl=${{ secrets.SLACKWEBHOOKURL }}
+          slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
         deploymentName: ${{ env.USER_ALIAS }}-dev
       
 
@@ -108,7 +108,7 @@ jobs:
   #       template: ./main.bicep
   #       parameters: >
   #         ./parameters/uat.bicepparam 
-  #         slackWebHookUrl=${{ secrets.SLACKWEBHOOKURL }}
+  #         slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
   #       deploymentName: ${{ env.USER_ALIAS }}-uat
 
 
@@ -143,5 +143,5 @@ jobs:
   #       template: ./main.bicep
   #       parameters: >
   #           ./parameters/uat.bicepparam 
-  #           slackWebHookUrl=${{ secrets.SLACKWEBHOOKURL }}
+  #           slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
   #       deploymentName: ${{ env.USER_ALIAS }}-prod
