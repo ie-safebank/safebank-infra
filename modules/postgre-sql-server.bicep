@@ -3,6 +3,11 @@ param location string = resourceGroup().location
 param postgresSQLAdminServicePrincipalObjectId string
 param postgresSQLAdminServicePrincipalName string
 
+@secure()
+param adminLogin string
+@secure()
+param adminPassword string
+
 param WorkspaceId string
 //@secure()
 //param adminPassword string
@@ -15,8 +20,8 @@ resource postgreSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01'
     tier: 'Burstable'
   }
   properties: {
-    administratorLogin: 'iebankdbadmin'
-    administratorLoginPassword: 'IE.Bank.DB.Admin.Pa$$'
+    administratorLogin: adminLogin
+    administratorLoginPassword: adminPassword
     createMode: 'Default'
     highAvailability: {
       mode: 'Disabled'

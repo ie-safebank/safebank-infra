@@ -167,11 +167,18 @@ module containerAppService 'modules/container-appservice.bicep' = {
 @sys.description('The name of the PostgreSQL Server')
 param postgreSQLServerName string
 
+@secure()
+param adminLogin string
+@secure()
+param adminLoginPass string
+
 module postgreSQLServer 'modules/postgre-sql-server.bicep' = {
   name: 'postgreSQLServer-${userAlias}'
   params: {
     name: postgreSQLServerName
     location: location
+    adminLogin: adminLogin
+    adminPassword: adminLoginPass
     WorkspaceId: logAnalyticsWorkspace.outputs.logAnalyticsWorkspaceId
     postgresSQLAdminServicePrincipalObjectId: containerAppService.outputs.systemAssignedIdentityPrincipalId
     postgresSQLAdminServicePrincipalName: containerName

@@ -2,6 +2,8 @@ using '../main.bicep'
 
 // SQL Server
 param postgreSQLServerName = 'safebank-dbsrv-uat'
+param adminLogin = ''
+param adminLoginPass = ''
 
 // SQL DB
 param postgreSQLDatabaseName = 'safebank-db-uat'
