@@ -59,7 +59,7 @@ resource availabilityAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
           metricNamespace: 'Microsoft.Web/sites'
           metricName: 'Availability'
           operator: 'LessThan'
-          threshold: 100
+          threshold: 99
           timeAggregation: 'Average'
         }
       ]
