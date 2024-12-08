@@ -137,7 +137,7 @@ jobs:
     - uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+        
       # Deploy Bicep file
     - name: Deploy PROD
       uses: azure/arm-deploy@v2
@@ -146,8 +146,8 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_PROD }}
         template: ./main.bicep
         parameters: >
-            ./parameters/prod.bicepparam 
-            slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
-            adminLogin=${{ secrets.SQL_ADMIN_LOGIN }}
-            adminLoginPass=${{ secrets.SQL_ADMIN_PASSWORD }}
+          ./parameters/prod.bicepparam 
+          slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
+          adminLogin=${{ secrets.SQL_ADMIN_LOGIN }}
+          adminLoginPass=${{ secrets.SQL_ADMIN_PASSWORD }}
         deploymentName: ${{ env.USER_ALIAS }}-prod
