@@ -46,7 +46,7 @@ jobs:
           az deployment group what-if \
             --resource-group ${{ env.RESOURCE_GROUP_DEV }} \
             --template-file ./modules/key-vault.bicep \
-            --parameters @parameters/key-vault-test.json
+            --parameters @parameters/key-vault-tests.json
 
   deploy:
     name: Deploy Test Key Vault
@@ -67,4 +67,4 @@ jobs:
           az deployment group create \
             --resource-group ${{ env.RESOURCE_GROUP_DEV }} \
             --template-file ./modules/key-vault.bicep \
-            --parameters @parameters/key-vault-test.json
+            --parameters @parameters/key-vault-tests.json
