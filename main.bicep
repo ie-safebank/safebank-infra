@@ -31,6 +31,10 @@ module logAnalyticsWorkspace 'modules/log-analytics-workspace.bicep' = {
 // App Insights
 @sys.description('The name of the Application Insights instance')
 param appInsightsName string
+@sys.description('The name of the Key Vault secret for the App Insights Instrumentation Key')
+param appInsightsKeyName string
+@sys.description('The name of the Key Vault secret for the App Insights Connection String')
+param appInsightsConnectionName string
 
 module appInsights 'modules/app-insights.bicep' = {
   name: 'appInsights-${userAlias}'
@@ -38,6 +42,9 @@ module appInsights 'modules/app-insights.bicep' = {
     name: appInsightsName
     type: 'web' 
     location: location 
+    keyVaultResourceId: keyVault.outputs.keyVaultId
+    appInsightsKeyName: appInsightsKeyName
+    appInsightsConnectionName: appInsightsConnectionName
     tagsArray: {
       environment: environmentType
       owner: userAlias

@@ -13,6 +13,12 @@ param type string
 @description('Resource ID of the linked Log Analytics Workspace')
 param workspaceResourceId string
 
+param keyVaultResourceId string
+#disable-next-line secure-secrets-in-params
+param appInsightsKeyName string
+#disable-next-line secure-secrets-in-params
+param appInsightsConnectionName string
+
 resource appInsights 'microsoft.insights/components@2020-02-02-preview' = {
   name: name
   location: location
@@ -23,6 +29,27 @@ resource appInsights 'microsoft.insights/components@2020-02-02-preview' = {
     Flow_Type: 'Redfield'
     WorkspaceResourceId: workspaceResourceId
     IngestionMode: 'LogAnalytics'
+  }
+}
+
+// Reference the existing Key Vault
+resource adminCredentialsKeyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
+  name: last(split(keyVaultResourceId, '/')) // Extract the name from the resource ID
+}
+
+resource appInsightsKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: appInsightsKeyName
+  parent: adminCredentialsKeyVault
+  properties: {
+    value: appInsights.properties.InstrumentationKey
+  }
+}
+
+resource appInsightsConnection 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: appInsightsConnectionName
+  parent: adminCredentialsKeyVault
+  properties: {
+    value: appInsights.properties.ConnectionString
   }
 }
 

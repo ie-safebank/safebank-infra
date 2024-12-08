@@ -49,6 +49,8 @@ param logAnalyticsWorkspaceName = 'safebank-law-dev'
 
 // Application Insights
 param appInsightsName = 'safebank-ai-dev'
+param appInsightsKeyName = 'appInsightsKey'
+param appInsightsConnectionName = 'appInsightsConnection'
 
 // App Service Plan
 param appServicePlanName = 'safebank-asp-dev'
