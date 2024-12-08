@@ -57,7 +57,7 @@ param appServicePlanName = 'safebank-asp-prod'
 
 // Workbook Parameters
 param workbookName = 'safebank-workbook-prod'
-param workbookJson = loadTextContent('../templates/safe-bank-workbook.workbook')
+param workbookJson = loadTextContent('../templates/safe-bank-workbook-prod.workbook')
 
 param logicAppName = 'safebank-la-prod'
 
