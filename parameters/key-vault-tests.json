@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "name": {
+        "value": "SafeBank-Key-Vault-test"
+      },
+      "enableRbacAuthorization": {
+        "value": true
+      },
+      "enableVaultForDeployment": {
+        "value": true
+      },
+      "enableVaultForTemplateDeployment": {
+        "value": true
+      },
+      "enableSoftDelete": {
+        "value": false
+      },
+      "sku": {
+        "value": "standard"
+      },
+      "roleAssignments": {
+        "value": [
+          {
+            "principalId": "25d8d697-c4a2-479f-96e0-15593a830ae5",
+            "roleDefinitionIdOrName": "Key Vault Secrets User",
+            "principalType": "ServicePrincipal"
+          },
+          {
+            "principalId": "a03130df-486f-46ea-9d5c-70522fe056de",
+            "roleDefinitionIdOrName": "Key Vault Administrator",
+            "principalType": "Group"
+          }
+        ]
+      },
+      "logAnalyticsWorkspaceId": {
+        "value": "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-PROD/providers/Microsoft.OperationalInsights/workspaces/safebank-law-prod"
+  
+      }
+    }
+  }

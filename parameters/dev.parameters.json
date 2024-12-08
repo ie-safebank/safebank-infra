@@ -8,12 +8,6 @@
         "postgreSQLServerName": {
             "value": "safebank-dbsrv-dev"
         },
-        "postgreSQLAdminLogin": {
-            "value": "iebankdbadmin"
-        },
-        "postgreSQLAdminPassword": {
-            "value": "IE.Bank.DB.Admin.Pa$$"
-        },
         "postgreSQLDatabaseName": {
             "value": "safebank-db-dev"
         },
@@ -28,27 +22,6 @@
         },
         "location": {
             "value": "North Europe"
-        },
-        "staticWebAppName": {
-            "value": "safebank-swa-dev"
-        },
-        "staticWebAppLocation": {
-            "value": "westeurope"
-        },
-        "containerName": {
-            "value": "safebank-container-dev"
-        },
-        "registryName": {
-            "value": "safebankcrdev"
-        },
-        "keyVaultName": {
-            "value": "safebank-kv-dev"
-        },
-        "logAnalyticsWorkspaceName": {
-            "value": "safebank-law-dev"
-        },
-        "appInsightsName": {
-            "value": "safebank-ai-dev"
         }
     }
 }

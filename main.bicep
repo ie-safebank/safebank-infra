@@ -31,6 +31,10 @@ module logAnalyticsWorkspace 'modules/log-analytics-workspace.bicep' = {
 // App Insights
 @sys.description('The name of the Application Insights instance')
 param appInsightsName string
+@sys.description('The name of the Key Vault secret for the App Insights Instrumentation Key')
+param appInsightsKeyName string
+@sys.description('The name of the Key Vault secret for the App Insights Connection String')
+param appInsightsConnectionName string
 
 module appInsights 'modules/app-insights.bicep' = {
   name: 'appInsights-${userAlias}'
@@ -38,6 +42,9 @@ module appInsights 'modules/app-insights.bicep' = {
     name: appInsightsName
     type: 'web' 
     location: location 
+    keyVaultResourceId: keyVault.outputs.keyVaultId
+    appInsightsKeyName: appInsightsKeyName
+    appInsightsConnectionName: appInsightsConnectionName
     tagsArray: {
       environment: environmentType
       owner: userAlias
@@ -46,6 +53,23 @@ module appInsights 'modules/app-insights.bicep' = {
   }
 }
 
+@description('The name of the Workbook')
+param workbookName string
+
+@description('The JSON template')
+@secure()
+param workbookJson string
+
+module workbook 'modules/workbook.bicep' = {
+  name: 'workbookDeployment'
+  params: {
+    workbookName: workbookName
+    location: resourceGroup().location
+    workbookJson: workbookJson
+    logAnalyticsWorkspaceId: logAnalyticsWorkspace.outputs.logAnalyticsWorkspaceId
+  }
+  dependsOn: [logAnalyticsWorkspace]
+}
 
 // Key Vault
 @sys.description('The name of the Key Vault')
@@ -87,6 +111,9 @@ module containerRegistry 'modules/container-registry.bicep' = {
     password1SecretName: containerRegistryPassword1SecretName
     workspaceId: logAnalyticsWorkspace.outputs.logAnalyticsWorkspaceId
   }
+  dependsOn: [
+    keyVault
+  ]
 }
 
 
@@ -147,11 +174,18 @@ module containerAppService 'modules/container-appservice.bicep' = {
 @sys.description('The name of the PostgreSQL Server')
 param postgreSQLServerName string
 
+@secure()
+param adminLogin string
+@secure()
+param adminLoginPass string
+
 module postgreSQLServer 'modules/postgre-sql-server.bicep' = {
   name: 'postgreSQLServer-${userAlias}'
   params: {
     name: postgreSQLServerName
     location: location
+    adminLogin: adminLogin
+    adminPassword: adminLoginPass
     WorkspaceId: logAnalyticsWorkspace.outputs.logAnalyticsWorkspaceId
     postgresSQLAdminServicePrincipalObjectId: containerAppService.outputs.systemAssignedIdentityPrincipalId
     postgresSQLAdminServicePrincipalName: containerName
@@ -182,8 +216,6 @@ module postgreSQLDatabase 'modules/postgre-sql-db.bicep' = {
 param staticWebAppName string
 @sys.description('The location of the Static Web App')
 param staticWebAppLocation string
-@sys.description('The URL of the repo with the Web App')
-param feRepositoryUrl string
 param staticWebAppTokenName string
 
 module staticWebApp 'modules/static-webapp.bicep' = {
@@ -191,8 +223,28 @@ module staticWebApp 'modules/static-webapp.bicep' = {
   params: {
     name: staticWebAppName
     location: staticWebAppLocation
-    url: feRepositoryUrl
     keyVaultResourceId: keyVault.outputs.keyVaultId
     tokenName: staticWebAppTokenName
   }
+}
+
+// Logic App
+
+@description('The name of the Logic App')
+param logicAppName string
+
+@description('Slack Webhook URL for sending alerts')
+@secure()
+param slackWebhookUrl string
+
+module logicApp 'modules/slack-logicapp.bicep' = {
+  name: logicAppName
+  params: {
+    location: location
+    logicAppName: logicAppName
+    slackWebhookUrl: slackWebhookUrl
+  }
+  dependsOn: [
+    staticWebApp
+  ]
 }

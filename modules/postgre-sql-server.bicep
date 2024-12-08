@@ -3,6 +3,11 @@ param location string = resourceGroup().location
 param postgresSQLAdminServicePrincipalObjectId string
 param postgresSQLAdminServicePrincipalName string
 
+@secure()
+param adminLogin string
+@secure()
+param adminPassword string
+
 param WorkspaceId string
 //@secure()
 //param adminPassword string
@@ -15,8 +20,8 @@ resource postgreSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01'
     tier: 'Burstable'
   }
   properties: {
-    administratorLogin: 'iebankdbadmin'
-    administratorLoginPassword: 'IE.Bank.DB.Admin.Pa$$'
+    administratorLogin: adminLogin
+    administratorLoginPassword: adminPassword
     createMode: 'Default'
     highAvailability: {
       mode: 'Disabled'
@@ -67,7 +72,26 @@ resource postgreSQLDiagnosticSettings 'Microsoft.Insights/diagnosticSettings@202
         category: 'PostgreSQLLogs'
         enabled: true
 
-        // Add all the logs we want to use
+      }
+      {
+        category: 'PostgreSQLFlexSessions'
+        enabled: true
+      }
+      {
+        category: 'PostgreSQLFlexQueryStoreRuntime'
+        enabled: true
+      }
+      {
+        category: 'PostgreSQLFlexQueryStoreWaitStats'
+        enabled: true
+      }
+      {
+        category: 'PostgreSQLFlexTableStats'
+        enabled: true
+      }
+      {
+        category: 'PostgreSQLFlexDatabaseXacts'
+        enabled: true
       }
     ]
     metrics: [

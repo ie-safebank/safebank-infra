@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "environmentType": {
-            "value": "nonprod"
+            "value": "prod"
         },
         "postgreSQLServerName": {
-            "value": "safebank-dbsrv-uat"
+            "value": "safebank-dbsrv-prod"
         },
         "postgreSQLDatabaseName": {
-            "value": "safebank-db-uat"
+            "value": "safebank-db-prod"
         },
         "appServicePlanName": {
-            "value": "safebank-asp-uat"
+            "value": "safebank-asp-prod"
         },
         "appServiceAPIAppName": {
-            "value": "safebank-be-uat"
+            "value": "safebank-be-prod"
         },
         "appServiceAppName": {
-            "value": "safebank-fe-uat"
+            "value": "safebank-fe-prod"
         },
         "location": {
             "value": "North Europe"

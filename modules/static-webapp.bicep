@@ -1,12 +1,12 @@
 param name string
 param location string = resourceGroup().location
 param sku string = 'Free'
-param url string 
-param feBranch string = 'main'
-param feRepoToken string = ''
-param feAppLocation string = '/'
-param feApiLocation string = ''
-param appArtifactLocation string = 'dist'
+//param url string 
+//param feBranch string = 'main'
+//param feRepoToken string = ''
+//param feAppLocation string = '/'
+//param feApiLocation string = ''
+//param appArtifactLocation string = 'dist'
 
 param keyVaultResourceId string
 #disable-next-line secure-secrets-in-params
@@ -19,14 +19,15 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
     name: sku
   }
   properties: {
-    repositoryUrl: url
-    branch: feBranch
-    repositoryToken: feRepoToken
-    buildProperties: {
-      appLocation: feAppLocation
-      apiLocation: feApiLocation
-      appArtifactLocation: appArtifactLocation
-    }
+    allowConfigFileUpdates: false
+//    repositoryUrl: url
+//    branch: feBranch
+//    repositoryToken: feRepoToken
+//    buildProperties: {
+//      appLocation: feAppLocation
+//      apiLocation: feApiLocation
+//      appArtifactLocation: appArtifactLocation
+//    }
   }
 }
 

@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "slackWebhookUrl": {
+        "type": "String"
+      }
+    },
+    "triggers": {
+      "Recurrence": {
+        "type": "Recurrence",
+        "recurrence": {
+          "frequency": "Minute",
+          "interval": 5
+        }
+      }
+    },
+    "actions": {
+      "Http_Post_to_Slack": {
+        "type": "Http",
+        "inputs": {
+          "method": "POST",
+          "uri": "@parameters('slackWebhookUrl')",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "text": "Alert: An event has triggered the Logic App and sent an alert to Slack, please check the details"
+          }
+        }
+      }
+    },
+    "outputs": {}
+  }

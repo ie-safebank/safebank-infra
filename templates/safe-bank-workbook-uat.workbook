@@ -1,0 +1,172 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Welcome to SafeBank Azure Workbook\n## Used to monitor the SLOs for the SafeBank Static Web App\nThis workbook shows the key SLOs defined for the reliability and performance:\n\n### SLOs:\n1. **99% Site Availability**\n2. **Average HTTP Response Time**\n3. **Request Volume Tracking**\n4. **Failed Connection Rate**\n5. **Less Than 1% Failed Requests**"
+      },
+      "name": "text - Welcome"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## SLO 1: 99% Site Availability\nThis line chart shows the availability of SafeBank's backend services over the past 7 days."
+      },
+      "name": "text - SLO 1: 99% Site Availability"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook-availability",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "resourceType": "microsoft.web/sites",
+        "metricScope": 0,
+        "resourceIds": [
+          "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-UAT/providers/Microsoft.Web/sites/safebank-be-uat"
+        ],
+        "timeContext": {
+          "durationMs": 604800000
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.web/sites",
+            "metric": "Availability",
+            "aggregation": 4,
+            "columnName": "Site Availability"
+          }
+        ],
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "name": "metric - SLO 1: 99% Site Availability"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## SLO 2: Average HTTP Response Time\nThis chart displays the average response time for HTTP requests over the past 24 hours."
+      },
+      "name": "text - SLO 2: Average HTTP Response Time"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AppServiceHTTPLogs\n| summarize AvgResponseTime = avg(TimeTaken) by bin(TimeGenerated, 1h)\n| render timechart",
+        "size": 0,
+        "timeContext": {
+          "durationMs": 86400000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "query - SLO 2: Average HTTP Response Time"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## SLO 3: Request Volume Tracking\nThis bar chart shows the total number of HTTP requests made to SafeBank's backend services, grouped by hour."
+      },
+      "name": "text - SLO 3: Request Volume Tracking"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AppServiceHTTPLogs\n| summarize RequestCount = count() by bin(TimeGenerated, 1h)\n| render barchart",
+        "size": 0,
+        "timeContext": {
+          "durationMs": 86400000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "query - SLO 3: Request Volume Tracking"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## SLO 4: Failed Connection Rate\nThis chart tracks the number of failed and active connections to SafeBank's database over the past 3 days."
+      },
+      "name": "text - SLO 4: Failed Connection Rate"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook-failed-connections",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+        "metricScope": 0,
+        "resourceIds": [
+          "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-UAT/providers/Microsoft.DBforPostgreSQL/flexibleServers/safebank-dbsrv-uat"
+        ],
+        "timeContext": {
+          "durationMs": 259200000
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.dbforpostgresql/flexibleservers",
+            "metric": "Errors-connections_failed",
+            "aggregation": 1,
+            "columnName": "Failed Connections"
+          },
+          {
+            "namespace": "microsoft.dbforpostgresql/flexibleservers",
+            "metric": "Traffic-active_connections",
+            "aggregation": 4,
+            "columnName": "Active Connections"
+          }
+        ],
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "name": "metric - SLO 4: Failed Connection Rate"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## SLO 5: Less Than 1% Failed Requests\nThis line chart shows the number of HTTP 5xx failed requests from SafeBank's backend over the past 3 days."
+      },
+      "name": "text - SLO 5: Less Than 1% Failed Requests"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook-failed-requests",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "resourceType": "microsoft.web/sites",
+        "metricScope": 0,
+        "resourceIds": [
+          "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-UAT/providers/Microsoft.Web/sites/safebank-be-uat"
+        ],
+        "timeContext": {
+          "durationMs": 259200000
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.web/sites",
+            "metric": "Http5xx",
+            "aggregation": 1,
+            "columnName": "Failed Requests"
+          }
+        ],
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "name": "metric - SLO 5: Less Than 1% Failed Requests"
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-UAT/providers/Microsoft.OperationalInsights/workspaces/SafeBank-log-uat"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
