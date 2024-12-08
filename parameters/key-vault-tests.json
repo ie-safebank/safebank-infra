@@ -34,8 +34,8 @@
           }
         ]
       },
-      "WorkspaceResourceId": {
-        "value": "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-DEV/providers/Microsoft.OperationalInsights/workspaces/safebank-law-dev"
+      "logAnalyticsWorkspaceId": {
+        "value": "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/BCSAI2024-DEVOPS-STUDENTS-A-PROD/providers/Microsoft.OperationalInsights/workspaces/safebank-law-prod"
   
       }
     }
