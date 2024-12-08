@@ -146,7 +146,7 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_PROD }}
         template: ./main.bicep
         parameters: >
-            ./parameters/uat.bicepparam 
+            ./parameters/prod.bicepparam 
             slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
             adminLogin=${{ secrets.SQL_ADMIN_LOGIN }}
             adminLoginPass=${{ secrets.SQL_ADMIN_PASSWORD }}
