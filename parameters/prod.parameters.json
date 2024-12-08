@@ -3,16 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "environmentType": {
-            "value": "nonprod"
+            "value": "prod"
         },
         "postgreSQLServerName": {
             "value": "safebank-dbsrv-prod"
-        },
-        "postgreSQLAdminLogin": {
-            "value": "iebankdbadmin"
-        },
-        "postgreSQLAdminPassword": {
-            "value": "IE.Bank.DB.Admin.Pa$$"
         },
         "postgreSQLDatabaseName": {
             "value": "safebank-db-prod"
@@ -28,27 +22,6 @@
         },
         "location": {
             "value": "North Europe"
-        },
-        "staticWebAppName": {
-            "value": "safebank-swa-prod"
-        },
-        "staticWebAppLocation": {
-            "value": "westeurope"
-        },
-        "containerName": {
-            "value": "safebank-container-prod"
-        },
-        "registryName": {
-            "value": "safebankcrprod"
-        },
-        "keyVaultName": {
-            "value": "safebank-kv-prod"
-        },
-        "logAnalyticsWorkspaceName": {
-            "value": "safebank-law-prod"
-        },
-        "appInsightsName": {
-            "value": "safebank-ai-prod"
         }
     }
 }
