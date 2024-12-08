@@ -111,6 +111,8 @@ jobs:
   #       parameters: >
   #         ./parameters/uat.bicepparam 
   #         slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
+  #         adminLogin=${{ secrets.SQL_ADMIN_LOGIN }}
+  #         adminLoginPass=${{ secrets.SQL_ADMIN_PASSWORD }}
   #       deploymentName: ${{ env.USER_ALIAS }}-uat
 
 
@@ -146,4 +148,6 @@ jobs:
   #       parameters: >
   #           ./parameters/uat.bicepparam 
   #           slackWebhookUrl=${{ secrets.SLACKWEBHOOKURL }}
+  #           adminLogin=${{ secrets.SQL_ADMIN_LOGIN }}
+  #           adminLoginPass=${{ secrets.SQL_ADMIN_PASSWORD }}
   #       deploymentName: ${{ env.USER_ALIAS }}-prod
